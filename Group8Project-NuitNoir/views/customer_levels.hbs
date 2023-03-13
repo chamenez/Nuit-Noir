@@ -1,0 +1,47 @@
+<!--customer_levels.hbs-->
+<h1>Customer Levels</h1>
+<body>    
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="browse" style="display: block">
+    {{!-- Create Customer Levels table--}}
+    <h3>Browse Customer Levels</h3>
+    <table id="customer_levels-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.ID}}</td>
+                <td>{{this.[Level Name]}}</td>
+                <td>{{this.Description}}</td>
+                <td>{{this.[Discount Percent]}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table> 
+    {{!-- Form to add a Customer Level to the table--}}
+    <h3>Add Customer Level</h3>
+    <form id="add-customerLevel-form-ajax">
+        
+        <label for="input-level_name">Level Name: </label>
+        <input type="text" name="input-level_name" id="input-level_name">
+
+        <label for="input-level_description">Level Description: </label>
+        <input type="text" name="input-level_description" id="input-level_description">
+
+        <label for="input-discount_percent">Discount Percent: </label>
+        <input type="number" step="0.01" min="0" max="1" name="input-discount_percent" id="input-discount_percent">  
+        
+        <input type="submit">
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_customer_level.js"></script>
+</div>

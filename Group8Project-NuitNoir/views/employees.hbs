@@ -1,0 +1,42 @@
+<!-- employees.hbs -->
+<h1>Employees</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="insert" style="display: block">
+    {{!-- Create a table --}}
+    <h3>Browse Employees</h3>
+    <table id="employee-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.ID}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Title}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{!-- Form to add a record to the table  --}}
+    <h3>Add Employee</h3>
+    <form id="add-employee-form-ajax">
+        <label for="input-employee_name">Name: </label>
+        <input type="text" name="input-employee_name" id="input-employee_name">
+        
+        <label for="input-employee_title">Title: </label>
+        <input type="text" name="input-employee_title" id="input-employee_title">
+
+        <input type="submit">
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_employee.js"></script>
+</div>

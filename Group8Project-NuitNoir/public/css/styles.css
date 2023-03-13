@@ -1,0 +1,10 @@
+* {
+    background-color: black;
+    color: silver;
+  }
+button {
+  border: 1px groove silver
+}
+input {
+  border: 1px groove silver
+}

@@ -1,0 +1,82 @@
+<!-- customers.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h1>Customers</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="insert" style="display: block">
+    {{!-- Create a table --}}
+    <h3>Browse Customers</h3>
+    <table id="customer-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Address}}</td>
+                <td>{{this.Email}}</td>
+                <td>{{this.[Level Name]}}</td>
+                <td><button onclick="deleteCustomer({{this.ID}})">Delete</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{!-- Form to add a record to the table  --}}
+    <h3>Add Customer</h3>
+    <form id="add-customer-form-ajax">
+
+        <label for="input-customer_name">Name: </label>
+        <input type="text" name="input-customer_name" id="input-customer_name">
+
+        <label for="input-customer_address">Address: </label>
+        <input type="text" name="input-customer_address" id="input-customer_address">
+
+        <label for="input-customer_email">Email: </label>
+        <input type="email" name="input-customer_email" id="input-customer_email">
+
+        <select name="input-customer_level_id" id="input-customer_level_id-ajax">
+            <option value="">Select Customer Level</option>
+            {{#each customer_level}}
+            <option value="{{this.customer_level_id}}">{{this.level_name}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit">
+
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_customer.js"></script>
+</div>
+<p>&nbsp;</p> 
+<div id="update" style="display: block">
+    <h3>Update Customer</h3>
+    <form id="update-customer-form-ajax">
+        <label for="input-customer_name">Name: </label>
+        <select name="input-customer_name" id="mySelect">
+            <option value="test">Select Customer</option>
+            {{#each data}}
+            <option value="{{this.ID}}">{{this.Name}}</option>
+            {{/each}}
+        </select>
+        <label for="input-customer_level">Customer Level: </label>
+        <select name="input-customer_level" id="input-customer_level-update">
+            <option>Select Customer Level</option>
+            {{#each customer_level}}
+            <option value="{{this.customer_level_id}}">{{this.level_name}}</option>
+            {{/each}}
+        </select>
+        <input type="submit">
+    </form>
+    <script src="./js/update_customer.js"></script>
+    <script src="./js/delete_customer.js"></script>
+</div>

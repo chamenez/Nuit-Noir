@@ -1,0 +1,74 @@
+<!--films.hbs-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h1>Films</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="insert" style="display: block">
+    {{!-- Create a table --}}
+    <h3>Browse Films</h3>
+    <table id="film-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Film}}</td>
+                <td>{{this.Price}}</td>
+                <td>{{this.[In Stock]}}</td>
+                <td><button onclick="deleteFilm({{this.ID}})">Delete</button></td>
+            </tr>
+            {{/each}}          
+        </tbody>
+    </table> 
+    {{!-- Form to add Film to the table--}}
+    <h3>Add Film</h3>
+    <form id="add-film-form-ajax">
+        
+        <label for="input-film_name">Film Name: </label>
+        <input type="text" name="input-film_name" id="input-film_name">
+
+        <label for="input-film_price">Price: </label>
+        <input type="text" name="input-film_price" id="input-film_price">
+
+        <label for="input-film_in_stock">Number in Stock: </label>
+        <input type="number" name="input-film_in_stock" id="input-film_in_stock">   
+        
+        <input type="submit">
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_film.js"></script>
+</div>
+<p>&nbsp;</p> 
+<div id="update" style="display: block">
+    <h3>Update Film</h3>
+    <form id="update-film-form-ajax">
+        <label for="input-film_name">Film Name: </label>
+        <select name="input-film_name" id="mySelect">
+            <option value="test">Select Film: </option>
+            {{#each data}}
+            <option value="{{this.ID}}">{{this.Film}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-film_price">Price: </label>
+        <input type="text" name="input-film_price" id="input-film_price-update">
+
+        <label for="input-film_in_stock">Number in Stock: </label>
+        <input type="number" name="input-film_in_stock" id="input-film_in_stock-update">
+        
+        <input type="submit">
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/update_film.js"></script>
+    <script src="./js/delete_film.js"></script>
+</div>

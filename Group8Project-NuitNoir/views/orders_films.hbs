@@ -1,0 +1,45 @@
+<!--orders_films.hbs-->
+<h1>Orders Films</h1>
+<body>    
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="browse" style="display: block">
+    {{!-- Create Orders_Films Intersection Table--}}
+    <h3>Browse Orders Films</h3>
+    <table id="orders_films-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.[Order ID]}}</td>
+                <td>{{this.Film}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table> 
+    {{!-- Form to add a intersection to the Orders_Films table --}}
+    <h3>Add Orders Films</h3>
+    <form id="add-OrdersFilms-form-ajax">
+        <label for="input-order_id">Order ID: </label>
+        <input type="text" name="input-order_id" id="input-order_id">
+
+        <select name="input-film_id" id="input-film_id-ajax">
+            <option value="">Select Film</option>
+            {{#each films}}
+            <option value="{{this.film_id}}">{{this.film_name}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit">
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request--}}
+    <script src="./js/add_orders_films.js"></script>
+</div>

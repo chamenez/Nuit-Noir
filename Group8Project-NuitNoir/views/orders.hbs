@@ -1,0 +1,68 @@
+<!--orders.hbs-->
+<h1>Orders</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="browse" style="display: block">
+    {{!-- Create Orders table --}}
+    <h3>Browse Orders</h3>
+    <table id="order-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.ID}}</td>
+                <td>{{dateFormat this.Date}}</td>
+                <td>{{this.[Total Price]}}</td>
+                <td>{{this.Employee}}</td>
+                <td>{{this.Customer}}</td>
+                <td>{{this.[Film(s)]}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table> 
+</div>
+{{!-- Form to add a Order to the table--}}
+<h3>Add Order</h3>
+<form id="add-order-form-ajax">
+
+        <label for="input-order_date">Order Date: </label>
+        <input type="date" name="input-order_date" id="input-order_date">
+
+        <label for="input-total_price">Total Price: </label>
+        <input type="text" name="input-total_price" id="input-total_price">
+
+        <select name="input-employee_id" id="input-employee_id-ajax">
+            <option value="">Select Employee: </option>
+            {{#each employees}}
+            <option value="{{this.employee_id}}">{{this.employee_name}}</option>
+            {{/each}}
+        </select>
+        
+        <select name="input-customer_id" id="input-customer_id-ajax">
+            <option value="">Select Customer: </option>
+            {{#each customers}}
+            <option value="{{this.customer_id}}">{{this.customer_name}}</option>
+            {{/each}}
+        </select>
+
+        <select name="input-film_id" id="input-film_id-ajax">
+            <option value="">Select Film: </option>
+            {{#each films}}
+            <option value="{{this.film_id}}">{{this.film_name}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit">
+        
+    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_order.js"></script>
